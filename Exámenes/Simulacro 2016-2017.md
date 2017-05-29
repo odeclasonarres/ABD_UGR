@@ -25,7 +25,7 @@
  - Deteniendo la instancia de BD y copiando los archivos log usando comandos del sistema operativo
 
 ##### 4.La cuenta de usuario JANE ha sido bloqueada por el sistema. ¿Cómo desbloquearías dicha cuenta sin eliminar los objetos de ese esquema?
- - Usando la sentencia ALTER USER con la cláusula ACCOUNT.
+ - **Usando la sentencia ALTER USER con la cláusula ACCOUNT.**
  - Usando la sentencia ALTER SYSTEM UNLOCK ACCOUNT.
  - Usando la sentencia DROP USER con la cláusula CASCADE.
  - Usando la sentencia ALTER USER con la cláusula QUOTA.
