@@ -33,7 +33,16 @@
 
 ### EJERCICIOS PRÁCTICOS
 
-##### Ejercicio 1
+##### Ejercicio 1 
+###### Crea el usuario examen1 con clave examen1, que cumpla:
+###### - que se le obligue a cambiar la clave la primera vez que se conecte,
+###### - con cuota de espacio ilimitada en el “tablespace” USERS (su “tablespace” por defecto) y con “tablespace” temporal TEMP,
+###### - asignale los roles CONNECT y RESOURCE.
+
+##### Crea el usuario examen2 con clave examen2, que cumpla:
+###### - con cuota de espacio ilimitada en el “tablespace” USERS (su “tablespace” por defecto) y con “tablespace” temporal TEMP,
+###### - asignale los roles CONNECT y RESOURCE.
+###### Conecta con el usuario examen1 y crea la tabla tabla_examen1 con una única columna llamada primera, de tipo NUMBER y que sea llave primaria. Haz que el usuario examen1 permita al usuario examen2 insertar tuplas en la tabla tabla_examen1 y comprueba que es posible (conecta con el usuario examen2 e intenta insertar en la tabla tabla_examen1 perteneciente al usuario examen1).
 ``` sql
 //Crear usuario 1
 create user examen1 identified by examen1 default tablespace USERS temporary tablespace TEMP quota unlimited on USERS password expire;
