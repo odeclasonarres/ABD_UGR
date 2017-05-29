@@ -1,0 +1,52 @@
+//EJERCICIO 1
+//Crear usuario 1
+create user examen1 identified by examen1 default tablespace USERS temporary tablespace TEMP quota unlimited on USERS password expire;
+//Asignar roles
+grant CONNECT to examen1;
+grant RESOURCE to examen1;
+
+//Crear usuario 1
+create user examen2 identified by examen2 default tablespace USERS temporary tablespace TEMP quota unlimited on USERS;
+grant CONNECT to examen2;
+grant RESOURCE to examen2;
+
+//Conectar como examen1, pide que cambies la contraseña
+connect examen1;
+
+//Crear tabla
+create table tabla_examen1(primera NUMBER PRIMARY KEY); 
+
+//permitir que 
+grant insert on tabla_examen1 to examen2;
+
+//Conectar como examen2 en otra terminal
+connect examen1;
+
+//examen2 inserta tupla
+insert into examen1.tabla_examen1(primera) values(15);
+
+//EJERCICIO 2
+//Crear el tablespace
+create tablespace examen datafile '/databases/app/oracle/examen01.dbf' size 20M PERMANENT ONLINE;
+
+//Añadir segundo fichero de datos
+alter tablespace examen add datafile '/databases/app/oracle/examen02.dbf' size 20M;
+
+//Cambiar la ubicación de los archivos
+//poner offline
+alter tablespace examen OFFLINE;
+//mover archivos(fuera de sql)
+cp /databases/app/oracle/examen01.dbf /databases/app/oracle/oradata/oradba/examen01.dbf
+cp /databases/app/oracle/examen02.dbf /databases/app/oracle/oradata/oradba/examen02.dbf
+//alterar el tablespace
+alter tablespace examen rename datafile '/databases/app/oracle/examen02.dbf' to '/databases/app/oracle/oradata/oradba/examen02.dbf';
+alter tablespace examen rename datafile '/databases/app/oracle/examen01.dbf' to '/databases/app/oracle/oradata/oradba/examen01.dbf';
+//poner online el tablespace
+alter tablespace examen online;
+//borrar archivos 
+rm /databases/app/oracle/examen01.dbf
+rm /databases/app/oracle/examen02.dbf
+
+
+//EJERCICIO 3
+//Tiramos la bd

@@ -1,0 +1,84 @@
+Presentación 4:
+-Datafiles 
+1a:
+create tablespace data datafile '/databases/app/ejercicios/datafiles/data01.dbf' size 10m minimum extent 500K default storage (initial 500k);
+
+1b:
+create tablespace ronly datafile '/databases/app/ejercicios/datafiles/ronly01.dbf' size 10m minimum extent 500K default storage (initial 500k) offline;
+alter tablespace ronly online;
+alter tablespace ronly read only;
+
+2: 
+alter database datafile '/databases/app/ejercicios/datafiles/data01.dbf' resize 20m;
+
+3: 
+create table prueba(x number) tablespace data;
+
+4: 
+alter tablespace data offline; 
+alter database rename file '/databases/app/ejercicios/datafiles/data01.dbf' to '/databases/app/ejercicios/datafiles/data01b.dbf';
+alter tablespace data online;
+
+5:
+drop tablespace data including contents;
+drop tablespace ronly;
+Hay que borrar manualmente los ficheros al final
+
+-Segmentos, extensiones y bloques:
+1:
+cambiar tablespace data01 por users 
+@/databases/app/ejercicios/datafiles/cr_segs
+
+2:
+select distinct segment_type from dba_segments;
+
+3:
+format segment_name a30;
+set pages 20;
+set pause on;
+select segment_name, max_extents, extents from dba_segments where max_extents - extents < 5;
+
+4: 
+select segment_name, segment_type, file_name from dba_extents, dba_data_files where dba_extents.file_id=dba_data_files.file_id and segment_name='EMP';
+
+Presentación 5:
+creacion de 
+1:
+create user bob identified by ALONG default tablespace users
+  2  temporary tablespace temp
+  3  quota 0M on system
+  4  quota 1M on users;
+
+grant connect to bob;
+
+2:
+create user kay identified by Mary
+  2  default tablespace users
+  3  temporary tablespace temp
+  4  quota unlimited on system;
+
+3: 
+create table kay.emp as select * from scott.emp;
+
+4: 
+select username, tablespace_name, max_bytes from dba_ts_quotas where username in ('BOB', 'KAY');
+
+
+Perfiles
+1: create profile nuevo limit
+sessions_per_user 2
+idle_time 1;
+
+
+3:
+alter profile default limit
+  2  failed_login_attempts 2
+  3  password_life_time 30
+  4  password_grace_time 5;
+
+select * from dba_profiles where profile='DEFAULT' and resource_type='PASSWORD';
+
+
+4:
+alter profile default limit
+  2  password_life_time unlimited;
