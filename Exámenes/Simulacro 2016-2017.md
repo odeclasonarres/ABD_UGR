@@ -1,5 +1,5 @@
 ## Simulacro de examen 2016-2017
-
+:octocat:
 
 ### CUESTIONARIOS
 
@@ -39,7 +39,7 @@
 ###### - con cuota de espacio ilimitada en el “tablespace” USERS (su “tablespace” por defecto) y con “tablespace” temporal TEMP,
 ###### - asignale los roles CONNECT y RESOURCE.
 
-##### Crea el usuario examen2 con clave examen2, que cumpla:
+###### Crea el usuario examen2 con clave examen2, que cumpla:
 ###### - con cuota de espacio ilimitada en el “tablespace” USERS (su “tablespace” por defecto) y con “tablespace” temporal TEMP,
 ###### - asignale los roles CONNECT y RESOURCE.
 ###### Conecta con el usuario examen1 y crea la tabla tabla_examen1 con una única columna llamada primera, de tipo NUMBER y que sea llave primaria. Haz que el usuario examen1 permita al usuario examen2 insertar tuplas en la tabla tabla_examen1 y comprueba que es posible (conecta con el usuario examen2 e intenta insertar en la tabla tabla_examen1 perteneciente al usuario examen1).
@@ -71,7 +71,9 @@ connect examen1;
 insert into examen1.tabla_examen1(primera) values(15);
 ```
 
-//EJERCICIO 2
+##### Ejercicio 2
+###### Crea el “tablespace” de tipo permanente EXAMEN asociándole el archivo de datos examen01.dbf, alojado en /databases/app/oracle, con 20 MB de tamaño. Después y sin detener la instancia, añade al tablespace un segundo archivo de datos examen02.dbf con el mismo tamaño y en la misma ubicación. Por último y sin detener la instancia, cambia la ubicación de los archivos a /databases/app/oracle/oradata/oradba y asegúrate de dejarlo online.
+```sql
 //Crear el tablespace
 create tablespace examen datafile '/databases/app/oracle/examen01.dbf' size 20M PERMANENT ONLINE;
 
@@ -85,14 +87,46 @@ alter tablespace examen OFFLINE;
 cp /databases/app/oracle/examen01.dbf /databases/app/oracle/oradata/oradba/examen01.dbf
 cp /databases/app/oracle/examen02.dbf /databases/app/oracle/oradata/oradba/examen02.dbf
 //alterar el tablespace
-alter tablespace examen rename datafile '/databases/app/oracle/examen02.dbf' to '/databases/app/oracle/oradata/oradba/examen02.dbf';
-alter tablespace examen rename datafile '/databases/app/oracle/examen01.dbf' to '/databases/app/oracle/oradata/oradba/examen01.dbf';
+alter tablespace examen rename file '/databases/app/oracle/examen02.dbf' to '/databases/app/oracle/oradata/oradba/examen02.dbf';
+alter tablespace examen rename file '/databases/app/oracle/examen01.dbf' to '/databases/app/oracle/oradata/oradba/examen01.dbf';
 //poner online el tablespace
 alter tablespace examen online;
 //borrar archivos 
 rm /databases/app/oracle/examen01.dbf
 rm /databases/app/oracle/examen02.dbf
+```
 
+#### Ejercicio 3
+##### Pon la BD en modo archivado (si ya lo está, indica cómo lo hiciste), haz un “backup on-line” del archivo de datos examen02.dbf en /databases/app/oracle/backup. Elimina del archivo /databases/app/oracle/oradata/oradba/examen02.dbf y después realiza una recuperación de dicho archivo a partir de la copia almacenada en /databases/app/oracle/backup.
+```sql
+// Para pasar la base de datos a "modo archivado", como usuario SYS:
+SHUTDOWN IMMEDIATE;
+STARTUP MOUNT;
+ALTER DATABASE ARCHIVE LOG;
+ALTER DATABASE OPEN;
 
-//EJERCICIO 3
-//Tiramos la bd
+// Para realizar la copia de seguridad, como usuario SYS:
+ALTER TABLESPACE EXAMEN BEGIN BACKUP;
+
+// Como usuario del sistema operativo:
+cp -pv /databases/app/oracle/oradata/oradba/examen02.dbf /databases/app/oracle/backup
+
+//Como usuario SYS:
+ALTER TABLESPACE EXAMEN END BACKUP;
+
+//Para producir el fallo, como usuario SYS:
+SHUTDOWN IMMEDIATE;
+
+//Como usuario del sistema operativo:
+mv /databases/app/oracle/oradata/oradba/examen02.dbf /databases/app/oracle/oradata/oradba/examen02_borrado.dbf 
+
+//Como usuario SYS:
+STARTUP
+
+//Para la recuperación del fichero "borrado", como usuario del sistema operativo:
+cp -pv /databases/app/oracle/backup/examen02.dbf /databases/app/oracle/oradata/oradba
+
+//Como usuario SYS:
+RECOVER DATAFILE '/databases/app/oracle/backup/examen02.dbf';
+ALTER DATABASE OPEN;
+```
