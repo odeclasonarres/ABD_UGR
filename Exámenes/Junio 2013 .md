@@ -1,29 +1,29 @@
 ### Cuestionario
 #### 1. ¿Qué pasará si todos los miembros del grupo log actual quedaran inaccesibles al proceso LGWR cuando se va a escribir en ellos?
-##### - Se detendrı́a la instancia de la BD.
-##### - Se eliminarı́a el grupo log actual.
-##### - El DBA tendrı́a que forzar un log “switch”.
-##### - El grupo log se ignorarı́a por el LGWR y los datos a archivar se escribirı́an en el grupo siguiente.
+ - Se detendrı́a la instancia de la BD.
+ - Se eliminarı́a el grupo log actual.
+ - El DBA tendrı́a que forzar un log “switch”.
+ - El grupo log se ignorarı́a por el LGWR y los datos a archivar se escribirı́an en el grupo siguiente.
 
 #### 2. Usando SQL*Plus, ¿cómo podrı́as visualizar los valores actuales para la “spool area”?
-##### - Abriendo el init.ora.
-##### - Usando el comando SET.
-##### - Usando el comando SHOW.
-##### - Usando el comando DESCRIBE.
-##### - Consultando el diccionario/catálogo de la BD.
+ - Abriendo el init.ora.
+ - Usando el comando SET.
+ - Usando el comando SHOW.
+ - Usando el comando DESCRIBE.
+ - Consultando el diccionario/catálogo de la BD.
 
 #### 3. ¿Cuáles son los pasos correctos a seguir para resolver un error del S.O. causado por un espacio de disco insuficiente mientras se crea una base de datos?
-##### - Reservar espacio para los “datafiles” usando el comando ALTER DATABASE.
-##### - Detener la instancia de BD, modificar el tamaño del bloque de BD y reiniciar la instancia.
-##### - Redimensionar los “datafiles” creados por la sentencia CREATE DATABASE usando la sentencia ALTER DATABASE.
-##### - Detener la instancia de BD, eliminar todos los archivos creados por la sentencia CREATE DATABASE, corregir el problema e intentar crear la BD de nuevo.
+ - Reservar espacio para los “datafiles” usando el comando ALTER DATABASE.
+ - Detener la instancia de BD, modificar el tamaño del bloque de BD y reiniciar la instancia.
+ - Redimensionar los “datafiles” creados por la sentencia CREATE DATABASE usando la sentencia ALTER DATABASE.
+ - Detener la instancia de BD, eliminar todos los archivos creados por la sentencia CREATE DATABASE, corregir el problema e intentar crear la BD de nuevo.
 
 #### 4. ¿Qué dos vistas deberı́as consultar para visualizar los nombres y localización de los archivos de control para la BD oradba? Elige dos:
-##### - V$INSTANCE
-##### - V$DATABASE
-##### - V$SYSTEM PARAMETER
-##### - V$CONTROLFILE
-##### - V$CONTROLFILE RECORD SECTION
+ - V$INSTANCE
+ - V$DATABASE
+ - V$SYSTEM PARAMETER
+ - V$CONTROLFILE
+ - V$CONTROLFILE RECORD SECTION
 
 ### Supuestos prácticos
 #### 1. Cread el “tablespace” de tipo permanente EXAMEN asociándole el archivo de datos: examen01.dbf, alojado en C:\oracle\oradata\oradba, con 10 MB de tamaño y con ampliación automática de tamaño en incrementos de 100K hasta un máximo de 100MB. Guardad en el archivo de texto C:\creatablespace.sql
