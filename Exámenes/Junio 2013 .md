@@ -26,9 +26,7 @@
  - V$CONTROLFILE RECORD SECTION
 
 ### Supuestos prácticos
-#### 1. Cread el “tablespace” de tipo permanente EXAMEN asociándole el archivo de datos: examen01.dbf, alojado en C:\oracle\oradata\oradba, con 10 MB de tamaño y con ampliación automática de tamaño en incrementos de 100K hasta un máximo de 100MB. Guardad en el archivo de texto C:\creatablespace.sql
-las sentencias SQL mediante las cuales se crearı́an el “tablespace” y archivo
-de datos mencionados.
+#### 1. Cread el “tablespace” de tipo permanente EXAMEN asociándole el archivo de datos: examen01.dbf, alojado en C:\oracle\oradata\oradba, con 10 MB de tamaño y con ampliación automática de tamaño en incrementos de 100K hasta un máximo de 100MB. Guardad en el archivo de texto C:\creatablespace.sql las sentencias SQL mediante las cuales se crearı́an el “tablespace” y archivo de datos mencionados.
 ```sql
 
 ```
