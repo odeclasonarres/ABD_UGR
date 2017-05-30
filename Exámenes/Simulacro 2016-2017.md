@@ -1,4 +1,4 @@
-## Simulacro de examen 2016-2017
+	## Simulacro de examen 2016-2017
 :octocat:
 
 ### CUESTIONARIOS
@@ -102,7 +102,7 @@ rm /databases/app/oracle/examen02.dbf
 // Para pasar la base de datos a "modo archivado", como usuario SYS:
 SHUTDOWN IMMEDIATE;
 STARTUP MOUNT;
-ALTER DATABASE ARCHIVE LOG;
+ALTER DATABASE ARCHIVELOG;
 ALTER DATABASE OPEN;
 
 // Para realizar la copia de seguridad, como usuario SYS:
