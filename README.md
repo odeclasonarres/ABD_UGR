@@ -14,7 +14,7 @@ Prácticas de la asignatura Administración de Bases de Datos, de la rama de Sis
 - Práctica 5: [Gestión de usuarios, perfiles, privilegios y roles](https://github.com/odeclasonarres/ABD_UGR/tree/master/P5).
 - Práctica 6: [Estrategias de Backup. Exportación e importación de objetos](https://github.com/odeclasonarres/ABD_UGR/tree/master/P6).
 
-[Exámenes resueltos]().
+[Exámenes resueltos](https://github.com/odeclasonarres/ABD_UGR/tree/master/Ex%C3%A1menes).
 
 #### Chuletas varias
 - [SQL básico](https://github.com/odeclasonarres/ABD_UGR/blob/master/Cheatsheet%20SQL.md).
